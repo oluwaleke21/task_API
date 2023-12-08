@@ -4,8 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index').default;
-var taskRouter = require('./routes/task');
+var indexRouter = require('./routes/index');
+var taskRouter = require('./routes/task').default;
 
 var app = express();
 
@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', indexRouter);
 app.use('/task', taskRouter);
+app.use('/auth', authRouter);
 
 const db = require('./models/index');
 db.sequelize
